@@ -20,7 +20,8 @@ class AppFlow {
     
     func start() {
         let screen = SearchCityScreen()
-        window.rootViewController = screen.viewController
+        let navigationController = UINavigationController(rootViewController: screen.viewController)
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
 }
