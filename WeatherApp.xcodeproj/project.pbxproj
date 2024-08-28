@@ -10,6 +10,7 @@
 		8851E8E52C7E34ED00044FFE /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D83E8F2C7D3836002A2BE9 /* AppCoordinator.swift */; };
 		8851E8E62C7E34EF00044FFE /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D83E8C2C7D36B4002A2BE9 /* AppFlow.swift */; };
 		885D121E2C7FAF49005D934C /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D121D2C7FAF49005D934C /* String+Regex.swift */; };
+		885D12232C7FC9C4005D934C /* SearchRegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D12222C7FC9C4005D934C /* SearchRegexTests.swift */; };
 		88CD3DE82C7BD65A0016224D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CD3DE72C7BD65A0016224D /* AppDelegate.swift */; };
 		88CD3DEA2C7BD65A0016224D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CD3DE92C7BD65A0016224D /* SceneDelegate.swift */; };
 		88CD3DF12C7BD65B0016224D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88CD3DF02C7BD65B0016224D /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		885D121D2C7FAF49005D934C /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
+		885D12222C7FC9C4005D934C /* SearchRegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRegexTests.swift; sourceTree = "<group>"; };
 		88CD3DE42C7BD65A0016224D /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88CD3DE72C7BD65A0016224D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88CD3DE92C7BD65A0016224D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				88CD3DFE2C7BD65B0016224D /* WeatherAppTests.swift */,
+				885D12222C7FC9C4005D934C /* SearchRegexTests.swift */,
 			);
 			path = WeatherAppTests;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88CD3DFF2C7BD65B0016224D /* WeatherAppTests.swift in Sources */,
+				885D12232C7FC9C4005D934C /* SearchRegexTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

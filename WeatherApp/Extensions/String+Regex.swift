@@ -2,7 +2,7 @@
 // Copyright © 2024  Nykiel Jakub. All rights reserved.
 //
 
-extension String {
+public extension String {
     
     static let searchRegex = "^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\s]*$"
     
