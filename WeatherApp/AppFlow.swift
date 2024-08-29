@@ -8,12 +8,15 @@ class AppFlow {
     
     // MARK: - Properties
     
+    private let apiService: APIService
+    
     private let window: UIWindow
     
     // MARK: - Initializers
     
-    init(window: UIWindow) {
+    init(window: UIWindow, apiService: APIService) {
         self.window = window
+        self.apiService = apiService
     }
     
     // MARK: - API
@@ -21,7 +24,7 @@ class AppFlow {
     func start() {
         let screen = SearchCityScreen()
         let navigationController = UINavigationController(rootViewController: screen.viewController)
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        navigationController.modalPresentationStyle = .fullScreen
+        window.rootViewController?.present(navigationController, animated: true)
     }
 }
