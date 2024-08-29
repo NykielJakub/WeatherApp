@@ -4,5 +4,7 @@
 
 protocol APIService: AnyObject {
     
+    // MARK: - Methods
     
+    func searchCities(for input: String, completion: @escaping (Result<[CityDTO], Error>) -> ())
 }

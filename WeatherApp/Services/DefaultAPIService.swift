@@ -2,6 +2,8 @@
 // Copyright © 2024  Nykiel Jakub. All rights reserved.
 //
 
+import Foundation
+
 class DefaultAPIService: APIService {
     
     // MARK: - Properties
@@ -14,5 +16,36 @@ class DefaultAPIService: APIService {
         self.apiKey = apiKey
     }
     
-    // MARK: - Private
+    // MARK: - API
+    
+    func searchCities(for input: String, completion: @escaping (Result<[CityDTO], any Error>) -> ()) {
+        let encodedInput = input.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? input
+        let urlString = "https://api.openweathermap.org/geo/1.0/direct?q=\(encodedInput)&appid=\(apiKey)"
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: nil)))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: -1, userInfo: nil)))
+                return
+            }
+            
+            do {
+                let cityDTOs = try JSONDecoder().decode([CityDTO].self, from: data)
+                completion(.success(cityDTOs))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        
+        task.resume()
+    }
 }
