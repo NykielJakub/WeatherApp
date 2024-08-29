@@ -19,7 +19,6 @@ final class SearchCityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupSearch()
         setupNavigation()
     }

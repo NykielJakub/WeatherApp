@@ -11,6 +11,14 @@
 		8851E8E62C7E34EF00044FFE /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D83E8C2C7D36B4002A2BE9 /* AppFlow.swift */; };
 		885D121E2C7FAF49005D934C /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D121D2C7FAF49005D934C /* String+Regex.swift */; };
 		885D12232C7FC9C4005D934C /* SearchRegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D12222C7FC9C4005D934C /* SearchRegexTests.swift */; };
+		885D122B2C7FE73E005D934C /* ConfigTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885D122A2C7FE73E005D934C /* ConfigTemplate.plist */; };
+		885D122D2C7FE7E6005D934C /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885D122C2C7FE7E6005D934C /* Config.plist */; };
+		885D12322C7FE88E005D934C /* CityDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D122F2C7FE88E005D934C /* CityDTO.swift */; };
+		885D12352C80BF4A005D934C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D12342C80BF4A005D934C /* APIService.swift */; };
+		885D12372C80BF51005D934C /* DefaultAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D12362C80BF51005D934C /* DefaultAPIService.swift */; };
+		885D123A2C80DDBF005D934C /* ConfigKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D12392C80DDBE005D934C /* ConfigKeys.swift */; };
+		885D123D2C80EFD4005D934C /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D123C2C80EFD4005D934C /* City.swift */; };
+		885D123F2C80EFEC005D934C /* DtoToDomainMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D123E2C80EFEC005D934C /* DtoToDomainMapper.swift */; };
 		88CD3DE82C7BD65A0016224D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CD3DE72C7BD65A0016224D /* AppDelegate.swift */; };
 		88CD3DEA2C7BD65A0016224D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CD3DE92C7BD65A0016224D /* SceneDelegate.swift */; };
 		88CD3DF12C7BD65B0016224D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88CD3DF02C7BD65B0016224D /* Assets.xcassets */; };
@@ -48,6 +56,14 @@
 /* Begin PBXFileReference section */
 		885D121D2C7FAF49005D934C /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		885D12222C7FC9C4005D934C /* SearchRegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRegexTests.swift; sourceTree = "<group>"; };
+		885D122A2C7FE73E005D934C /* ConfigTemplate.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ConfigTemplate.plist; sourceTree = "<group>"; };
+		885D122C2C7FE7E6005D934C /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		885D122F2C7FE88E005D934C /* CityDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityDTO.swift; sourceTree = "<group>"; };
+		885D12342C80BF4A005D934C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		885D12362C80BF51005D934C /* DefaultAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAPIService.swift; sourceTree = "<group>"; };
+		885D12392C80DDBE005D934C /* ConfigKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigKeys.swift; sourceTree = "<group>"; };
+		885D123C2C80EFD4005D934C /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		885D123E2C80EFEC005D934C /* DtoToDomainMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoToDomainMapper.swift; sourceTree = "<group>"; };
 		88CD3DE42C7BD65A0016224D /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88CD3DE72C7BD65A0016224D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88CD3DE92C7BD65A0016224D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +102,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		885D122E2C7FE88E005D934C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		885D12302C7FE88E005D934C /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				885D122F2C7FE88E005D934C /* CityDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		885D12312C7FE88E005D934C /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				885D122E2C7FE88E005D934C /* Controllers */,
+				885D12302C7FE88E005D934C /* DTOs */,
+			);
+			path = REST;
+			sourceTree = "<group>";
+		};
+		885D12332C80BF31005D934C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				885D12342C80BF4A005D934C /* APIService.swift */,
+				885D12362C80BF51005D934C /* DefaultAPIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		885D12382C80DD8B005D934C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				885D12392C80DDBE005D934C /* ConfigKeys.swift */,
+				885D123E2C80EFEC005D934C /* DtoToDomainMapper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		885D123B2C80EFC7005D934C /* DomainModels */ = {
+			isa = PBXGroup;
+			children = (
+				885D123C2C80EFD4005D934C /* City.swift */,
+			);
+			path = DomainModels;
+			sourceTree = "<group>";
+		};
 		88CD3DDB2C7BD65A0016224D = {
 			isa = PBXGroup;
 			children = (
@@ -111,10 +177,14 @@
 				88D83E8F2C7D3836002A2BE9 /* AppCoordinator.swift */,
 				88D83E8C2C7D36B4002A2BE9 /* AppFlow.swift */,
 				88CD3DE92C7BD65A0016224D /* SceneDelegate.swift */,
+				885D123B2C80EFC7005D934C /* DomainModels */,
 				88D83E782C7D2760002A2BE9 /* Extensions */,
 				88D83E7C2C7D280F002A2BE9 /* Resources */,
+				885D12312C7FE88E005D934C /* REST */,
 				88D83E802C7D31BD002A2BE9 /* Scenes */,
+				885D12332C80BF31005D934C /* Services */,
 				88CD3E192C7BD8F80016224D /* Supporting Files */,
+				885D12382C80DD8B005D934C /* Utilities */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -132,6 +202,8 @@
 			isa = PBXGroup;
 			children = (
 				88CD3E2A2C7BE09D0016224D /* Info.plist */,
+				885D122C2C7FE7E6005D934C /* Config.plist */,
+				885D122A2C7FE73E005D934C /* ConfigTemplate.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -289,7 +361,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				885D122D2C7FE7E6005D934C /* Config.plist in Resources */,
 				88CD3DF12C7BD65B0016224D /* Assets.xcassets in Resources */,
+				885D122B2C7FE73E005D934C /* ConfigTemplate.plist in Resources */,
 				88D83E752C7D26FF002A2BE9 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,15 +382,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				885D12322C7FE88E005D934C /* CityDTO.swift in Sources */,
 				8851E8E52C7E34ED00044FFE /* AppCoordinator.swift in Sources */,
 				8851E8E62C7E34EF00044FFE /* AppFlow.swift in Sources */,
 				885D121E2C7FAF49005D934C /* String+Regex.swift in Sources */,
+				885D12352C80BF4A005D934C /* APIService.swift in Sources */,
 				88CD3DE82C7BD65A0016224D /* AppDelegate.swift in Sources */,
+				885D123D2C80EFD4005D934C /* City.swift in Sources */,
+				885D12372C80BF51005D934C /* DefaultAPIService.swift in Sources */,
 				88CD3DEA2C7BD65A0016224D /* SceneDelegate.swift in Sources */,
+				885D123F2C80EFEC005D934C /* DtoToDomainMapper.swift in Sources */,
 				88D83E8A2C7D367F002A2BE9 /* SearchCityScreen.swift in Sources */,
 				88D83E882C7D3515002A2BE9 /* SearchCityViewController+ContentView.swift in Sources */,
 				88D83E7B2C7D2786002A2BE9 /* String+Localizable.swift in Sources */,
 				88D83E862C7D3507002A2BE9 /* SearchCityViewController.swift in Sources */,
+				885D123A2C80DDBF005D934C /* ConfigKeys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
