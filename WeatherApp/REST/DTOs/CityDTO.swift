@@ -7,7 +7,7 @@ struct CityDTO: Decodable {
     // MARK: - Properties
     
     let name: String
-    let localNames: [String: String]
+    let localNames: [String: String]?
     let latitude: Double
     let longitude: Double
     let country: String
@@ -27,7 +27,7 @@ struct CityDTO: Decodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        localNames = try values.decode([String: String].self, forKey: .localNames)
+        localNames = try values.decodeIfPresent([String: String].self, forKey: .localNames)
         latitude = try values.decode(Double.self, forKey: .latitude)
         longitude = try values.decode(Double.self, forKey: .longitude)
         country = try values.decode(String.self, forKey: .country)

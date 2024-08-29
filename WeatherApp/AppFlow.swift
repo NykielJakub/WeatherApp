@@ -2,6 +2,7 @@
 // Copyright © 2024  Nykiel Jakub. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 class AppFlow {
@@ -9,8 +10,9 @@ class AppFlow {
     // MARK: - Properties
     
     private let apiService: APIService
-    
     private let window: UIWindow
+    
+    private var subscriptions = Set<AnyCancellable>()
     
     // MARK: - Initializers
     
@@ -22,9 +24,21 @@ class AppFlow {
     // MARK: - API
     
     func start() {
-        let screen = SearchCityScreen()
+        subscriptions.removeAll()
+        
+        let screen = SearchCityScreen(apiService: apiService)
+        
+        screen.router.navigateToCityWeather
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] city in self?.showWeather(for: city) })
+            .store(in: &subscriptions)
+        
         let navigationController = UINavigationController(rootViewController: screen.viewController)
         navigationController.modalPresentationStyle = .fullScreen
         window.rootViewController?.present(navigationController, animated: true)
+    }
+    
+    func showWeather(for city: City) {
+        
     }
 }

@@ -5,7 +5,6 @@
   Copyright © 2024 Nykiel Jakub. All rights reserved.
 */
 
-/* Navigation */
-
 "weather" = "Pogoda";
 "search_placeholder" = "Szukaj miasta";
+"recent_searches" = "Ostatnie wyszukiwania";

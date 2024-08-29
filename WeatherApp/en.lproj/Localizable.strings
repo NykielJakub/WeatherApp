@@ -5,7 +5,6 @@
   Copyright © 2024 Nykiel Jakub. All rights reserved.
 */
 
-/* Navigation */
-
 "weather" = "Weather";
 "search_placeholder" = "Search city";
+"recent_searches" = "Recent searches";
