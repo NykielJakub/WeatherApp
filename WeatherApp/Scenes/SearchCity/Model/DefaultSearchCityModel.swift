@@ -7,12 +7,14 @@ final class DefaultSearchCityModel: SearchCityModel {
     // MARK: - Properties
     
     private let apiService: APIService
+    private let coreDataService: CoreDataService
     private let mapper = DtoToDomainMapper()
     
     // MARK: - Initializers
     
-    init(apiService: APIService) {
+    init(apiService: APIService, coreDataService: CoreDataService) {
         self.apiService = apiService
+        self.coreDataService = coreDataService
     }
     
     // MARK: - API
@@ -26,5 +28,12 @@ final class DefaultSearchCityModel: SearchCityModel {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func fetchSearchedCities() -> [City] {
+        coreDataService.fetchCities()
+            .compactMap {
+                return City(name: $0.name ?? "", latitude: $0.latitude, longitude: $0.longitude, country: $0.country ?? "")
+            }
     }
 }

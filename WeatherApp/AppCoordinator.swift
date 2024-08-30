@@ -2,6 +2,7 @@
 // Copyright © 2024  Nykiel Jakub. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 public final class AppCoordinator {
@@ -13,6 +14,7 @@ public final class AppCoordinator {
     // MARK: - Properties
     
     private var apiService: DefaultAPIService?
+    private var coreDataService: CoreDataService?
     
     private var appFlow: AppFlow?
     private var window: UIWindow?
@@ -38,8 +40,18 @@ public final class AppCoordinator {
             }
         }
         
-        guard let apiService else { return }
-        appFlow = AppFlow(window: window, apiService: apiService)
+        configureCoreDataContainer() { [weak self] result in
+            switch result {
+            case .success(let container):
+                self?.coreDataService = DefaultCoreDataService(container: container)
+            case .failure(let error):
+                self?.handleError(error)
+            }
+        }
+        
+        
+        guard let apiService, let coreDataService else { return }
+        appFlow = AppFlow(window: window, apiService: apiService, coreDataService: coreDataService)
         appFlow?.start()
     }
     
@@ -59,6 +71,16 @@ public final class AppCoordinator {
         completion(.success(value))
     }
     
+    private func configureCoreDataContainer(completion: @escaping (Result<NSPersistentContainer, AppError>) -> ()) {
+        let container = NSPersistentContainer(name: "WeatherApp")
+        container.loadPersistentStores { _ , error in
+            if let error = error {
+                completion(.failure(.coreDataError(error.localizedDescription)))
+            }
+            completion(.success(container))
+        }
+    }
+    
     private func handleError(_ appError: AppError) {
         let alert = UIAlertController(title: "Błąd", message: appError.errorDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -72,15 +94,18 @@ extension AppCoordinator {
         case lackOfConfigFile
         case invalidAPIKey
         case servicesNotConfigured
+        case coreDataError(String)
         
         var errorDescription: String? {
             switch self {
             case .lackOfConfigFile:
-                return "brak pliku"
+                return "Config.plist missing file"
             case .invalidAPIKey:
-                return "nie ma api key"
+                return "Invalid API KEY"
             case .servicesNotConfigured:
                 return "service nil"
+            case .coreDataError(let error):
+                return "CoreData error: \(error)"
             }
         }
     }
