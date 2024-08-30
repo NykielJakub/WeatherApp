@@ -15,8 +15,6 @@ final class SearchCityViewController: UIViewController {
     
     private let viewModel: SearchCityViewModel
     
-    private var isDynamicAvailable = false
-    
     private var subscriptions = Set<AnyCancellable>()
     
     // MARK: - Initializers
@@ -56,7 +54,6 @@ final class SearchCityViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "search_placeholder".localized
         searchController.searchBar.delegate = self
-        configureSearchMode()
     }
     
     private func setupSearchResultsTableView() {
@@ -81,16 +78,6 @@ final class SearchCityViewController: UIViewController {
         navigationItem.searchController = searchController
     }
     
-    private func configureSearchMode() {
-        guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
-            let config = NSDictionary(contentsOfFile: path) as? [String: AnyObject],
-            let isDynamicSearchOn = config[ConfigKeys.dynamicSearch] as? Bool else {
-            isDynamicAvailable = false
-            return
-        }
-        isDynamicAvailable = isDynamicSearchOn
-    }
-    
     private func bindViewWithViewModel() {
         
     }
@@ -112,13 +99,6 @@ extension SearchCityViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-        if isDynamicAvailable {
-            viewModel.fetchCities(for: searchText)
-        }
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text, !searchText.isEmpty else { return }
         viewModel.fetchCities(for: searchText)
     }
     
@@ -138,7 +118,6 @@ extension SearchCityViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        #warning("TODO: Animacje")
         searchResultsTableView.isHidden = false
     }
 }

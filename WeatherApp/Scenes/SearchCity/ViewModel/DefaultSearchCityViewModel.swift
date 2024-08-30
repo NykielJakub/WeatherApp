@@ -34,8 +34,7 @@ final class DefaultSearchCityViewModel: SearchCityViewModel {
                 self?.cities = cities
                 self?._fetchedCities.send(cities)
             case .failure(let error):
-                #warning("TODO: Handle errors")
-                break
+                print("[Error]: \(error.localizedDescription)")
             }
         }
     }
