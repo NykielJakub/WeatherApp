@@ -28,7 +28,7 @@ final class TemperatureLabel: UILabel {
     // MARK: - Setup
 
     private func setupLabel() {
-        self.font = .systemFont(ofSize: 16) // Domyślny rozmiar czcionki
+        self.font = .systemFont(ofSize: 16)
         self.textAlignment = .center
     }
 
