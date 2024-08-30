@@ -29,8 +29,8 @@ final class DefaultCityWeatherViewModel: CityWeatherViewModel {
             switch result {
             case .success(let weather):
                 self?._cityWeather.send(weather)
-            case .failure(let failure):
-                #warning("TODO: Handle errors")
+            case .failure(let error):
+                print("[Error]: \(error.localizedDescription)")
             }
         }
     }
