@@ -5,5 +5,4 @@
 struct ConfigKeys {
     
     static let api = "API_KEY"
-    static let dynamicSearch = "DYNAMIC_SEARCH"
 }
