@@ -12,6 +12,8 @@ class AppFlow {
     private let apiService: APIService
     private let window: UIWindow
     
+    private var navigationController: UINavigationController?
+    
     private var subscriptions = Set<AnyCancellable>()
     
     // MARK: - Initializers
@@ -35,10 +37,14 @@ class AppFlow {
         
         let navigationController = UINavigationController(rootViewController: screen.viewController)
         navigationController.modalPresentationStyle = .fullScreen
+        self.navigationController = navigationController
+        
         window.rootViewController?.present(navigationController, animated: true)
     }
     
     func showWeather(for city: City) {
+        let screen = CityWeatherScreen(city: city, apiService: apiService)
         
+        navigationController?.pushViewController(screen.viewController, animated: true)
     }
 }

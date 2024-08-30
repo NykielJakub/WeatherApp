@@ -8,3 +8,5 @@
 "weather" = "Weather";
 "search_placeholder" = "Search city";
 "recent_searches" = "Recent searches";
+"sunrise" = "Sunrise";
+"sunset" = "Sunset";

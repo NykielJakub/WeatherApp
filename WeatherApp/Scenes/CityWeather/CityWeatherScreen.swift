@@ -12,7 +12,9 @@ final class CityWeatherScreen {
     
     // MARK: - Initializers
     
-    init() {
-        
+    init(city: City, apiService: APIService) {
+        let model = DefaultCityWeatherModel(city: city, apiService: apiService)
+        let viewModel = DefaultCityWeatherViewModel(model: model)
+        viewController = CityWeatherViewController(viewModel: viewModel)
     }
 }

@@ -48,4 +48,36 @@ class DefaultAPIService: APIService {
         
         task.resume()
     }
+    
+    func getWeather(lat: Double, lon: Double, completion: @escaping (Result<CityWeatherDTO, Error>) -> ()) {
+        let lang = Locale.current.minimalIdentifier()
+        let urlString = "https://api.openweathermap.org/data/3.0/onecall?lat=\(lat)&lon=\(lon)&units=metric&lang=\(lang)&appid=\(apiKey)"
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: nil)))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: -1, userInfo: nil)))
+                return
+            }
+            
+            do {
+                let cityWeatherDTO = try JSONDecoder().decode(CityWeatherDTO.self, from: data)
+                completion(.success(cityWeatherDTO))
+            } catch {
+                print(error)
+                completion(.failure(error))
+            }
+        }
+        
+        task.resume()
+    }
 }

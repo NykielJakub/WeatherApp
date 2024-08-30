@@ -100,7 +100,6 @@ final class SearchCityViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] cities in
-                print("Miasta: \(cities)")
                 self?.searchResultsTableView.reloadData()
             })
             .store(in: &subscriptions)
