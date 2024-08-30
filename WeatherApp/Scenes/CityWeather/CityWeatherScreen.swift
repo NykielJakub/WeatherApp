@@ -13,6 +13,8 @@ final class CityWeatherScreen {
     // MARK: - Initializers
     
     init() {
-        
+        let model = DefaultCityWeatherModel()
+        let viewModel = DefaultCityWeatherViewModel(model: model)
+        viewController = CityWeatherViewController(viewModel: viewModel)
     }
 }
