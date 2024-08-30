@@ -7,7 +7,6 @@ final class DefaultSearchCityModel: SearchCityModel {
     // MARK: - Properties
     
     private let apiService: APIService
-    
     private let mapper = DtoToDomainMapper()
     
     // MARK: - Initializers

@@ -7,5 +7,5 @@ protocol APIService: AnyObject {
     // MARK: - Methods
     
     func searchCities(for input: String, completion: @escaping (Result<[CityDTO], Error>) -> ())
-    func getWeather(lat: Double, lon: Double)
+    func getWeather(lat: Double, lon: Double, completion: @escaping (Result<CityWeatherDTO, Error>) -> ())
 }

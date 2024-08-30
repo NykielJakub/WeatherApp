@@ -8,14 +8,14 @@ struct AlertDTO: Decodable {
     
     let sender: String
     let event: String
-    let description: String
+    let conditions: String
     
     // MARK: - Coding Keys
     
     enum CodingKeys: String, CodingKey {
         case sender = "sender_name"
         case event
-        case description
+        case conditions = "description"
     }
 
     // MARK: - Initializer
@@ -24,7 +24,7 @@ struct AlertDTO: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         sender = try values.decode(String.self, forKey: .sender)
         event = try values.decode(String.self, forKey: .event)
-        description = try values.decode(String.self, forKey: .description)
+        conditions = try values.decode(String.self, forKey: .conditions)
     }
     
 }

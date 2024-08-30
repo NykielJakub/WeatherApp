@@ -6,19 +6,19 @@ struct WeatherDescriptionDTO: Decodable {
     
     // MARK: - Properties
     
-    let description: String
+    let conditions: String
     
     // MARK: - Coding Keys
     
     enum CodingKeys: String, CodingKey {
-        case description
+        case conditions = "description"
     }
 
     // MARK: - Initializer
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        description = try values.decode(String.self, forKey: .description)
+        conditions = try values.decode(String.self, forKey: .conditions)
     }
     
 }

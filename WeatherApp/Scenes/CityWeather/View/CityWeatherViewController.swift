@@ -2,6 +2,7 @@
 // Copyright © 2024  Nykiel Jakub. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 final class CityWeatherViewController: UIViewController {
@@ -10,6 +11,8 @@ final class CityWeatherViewController: UIViewController {
     
     private let contentView = ContentView()
     private let viewModel: CityWeatherViewModel
+    
+    private var subscriptions = Set<AnyCancellable>()
     
     // MARK: - Initializers
     
@@ -34,18 +37,17 @@ final class CityWeatherViewController: UIViewController {
         super.viewWillAppear(animated)
         
         bindViewModelWithView()
-        bindViewWithViewModel()
         
         viewModel.fetchData()
     }
     
     // MARK: - Private
     
-    private func bindViewWithViewModel() {
-        
-    }
-    
     private func bindViewModelWithView() {
-        
+        viewModel.cityWeather
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] weather in self?.contentView.set(weather) })
+            .store(in: &subscriptions)
     }
 }
