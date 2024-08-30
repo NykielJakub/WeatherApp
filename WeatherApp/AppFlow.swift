@@ -10,6 +10,7 @@ class AppFlow {
     // MARK: - Properties
     
     private let apiService: APIService
+    private let coreDataService: CoreDataService
     private let window: UIWindow
     
     private var navigationController: UINavigationController?
@@ -18,9 +19,10 @@ class AppFlow {
     
     // MARK: - Initializers
     
-    init(window: UIWindow, apiService: APIService) {
+    init(window: UIWindow, apiService: APIService, coreDataService: CoreDataService) {
         self.window = window
         self.apiService = apiService
+        self.coreDataService = coreDataService
     }
     
     // MARK: - API
@@ -28,7 +30,7 @@ class AppFlow {
     func start() {
         subscriptions.removeAll()
         
-        let screen = SearchCityScreen(apiService: apiService)
+        let screen = SearchCityScreen(apiService: apiService, coreDataService: coreDataService)
         
         screen.router.navigateToCityWeather
             .sink(receiveCompletion: { _ in },
@@ -44,6 +46,8 @@ class AppFlow {
     
     func showWeather(for city: City) {
         let screen = CityWeatherScreen(city: city, apiService: apiService)
+        
+        coreDataService.saveCity(city: city)
         
         navigationController?.pushViewController(screen.viewController, animated: true)
     }

@@ -45,6 +45,14 @@ final class SearchCityViewController: UIViewController {
         
         bindViewModelWithView()
         bindViewWithViewModel()
+        
+        viewModel.fetchSearchedCities()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        subscriptions.removeAll()
     }
     
     // MARK: - Private
@@ -58,7 +66,7 @@ final class SearchCityViewController: UIViewController {
     
     private func setupSearchResultsTableView() {
         searchResultsTableView.translatesAutoresizingMaskIntoConstraints = false
-        searchResultsTableView.isHidden = true 
+        searchResultsTableView.isHidden = true
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
         searchResultsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "CityCell")
@@ -78,16 +86,30 @@ final class SearchCityViewController: UIViewController {
         navigationItem.searchController = searchController
     }
     
-    private func bindViewWithViewModel() {
-        
-    }
-    
     private func bindViewModelWithView() {
         viewModel.fetchedCities
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] cities in
                 self?.searchResultsTableView.reloadData()
+            })
+            .store(in: &subscriptions)
+        
+        viewModel.searchedCities
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] cities in
+                self?.contentView.set(cities)
+            })
+            .store(in: &subscriptions)
+    }
+    
+    private func bindViewWithViewModel() {
+        contentView.selectedCity
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] city in
+                self?.viewModel.showWeather(for: city)
             })
             .store(in: &subscriptions)
     }
@@ -98,7 +120,7 @@ final class SearchCityViewController: UIViewController {
 extension SearchCityViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else { return }
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { return }
         viewModel.fetchCities(for: searchText)
     }
     
@@ -106,6 +128,7 @@ extension SearchCityViewController: UISearchResultsUpdating {
         searchResultsTableView.isHidden = true
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        viewModel.fetchSearchedCities()
     }
 }
 
@@ -133,8 +156,8 @@ extension SearchCityViewController: UITableViewDataSource, UITableViewDelegate {
         cell = UITableViewCell(style: .subtitle, reuseIdentifier: "CityCell")
         
         let city = viewModel.cities[indexPath.row]
-        cell.textLabel?.text = "\(city.name), Country: \(city.country)"
-        cell.detailTextLabel?.text = "Lat: \(city.latitude), Lon: \(city.longitude)"
+        cell.textLabel?.text = "\(city.name)"
+        cell.detailTextLabel?.text = "\("country".localized): \(city.country), Lat: \(city.latitude), Lon: \(city.longitude)"
         
         return cell
     }

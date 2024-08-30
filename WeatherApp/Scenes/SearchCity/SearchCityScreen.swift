@@ -13,8 +13,8 @@ final class SearchCityScreen {
     
     // MARK: - Initializers
     
-    init(apiService: APIService) {
-        let model = DefaultSearchCityModel(apiService: apiService)
+    init(apiService: APIService, coreDataService: CoreDataService) {
+        let model = DefaultSearchCityModel(apiService: apiService, coreDataService: coreDataService)
         router = DefaultSearchCityRouter()
         let viewModel = DefaultSearchCityViewModel(model: model, router: router)
         viewController = SearchCityViewController(viewModel: viewModel)
