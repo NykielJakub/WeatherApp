@@ -10,7 +10,7 @@ extension CityWeatherViewController {
         
         // MARK: - Properties
         
-        private let temperatureLabel = UILabel()
+        private let temperatureLabel = TemperatureLabel()
         private let cityLabel = UILabel()
         private let conditionsLabel = UILabel()
         private let sunriseLabel = UILabel()
@@ -36,7 +36,7 @@ extension CityWeatherViewController {
         
         func set(_ weather: CityWeather) {
             let temperature = Int(weather.temperature.rounded())
-            temperatureLabel.text = "\(temperature)°C"
+            temperatureLabel.set(temperature: weather.temperature)
             cityLabel.text = weather.cityName
             conditionsLabel.text = weather.conditions
             
