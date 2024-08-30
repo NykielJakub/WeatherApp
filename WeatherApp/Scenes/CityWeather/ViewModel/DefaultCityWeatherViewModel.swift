@@ -13,4 +13,10 @@ final class DefaultCityWeatherViewModel: CityWeatherViewModel {
     init(model: CityWeatherModel) {
         self.model = model
     }
+    
+    // MARK: - API
+    
+    func fetchData() {
+        model.getWeather()
+    }
 }

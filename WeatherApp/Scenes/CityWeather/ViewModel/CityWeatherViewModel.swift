@@ -4,4 +4,7 @@
 
 protocol CityWeatherViewModel: AnyObject {
     
+    // MARK: - Methods
+    
+    func fetchData()
 }

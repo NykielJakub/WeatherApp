@@ -35,6 +35,8 @@ final class CityWeatherViewController: UIViewController {
         
         bindViewModelWithView()
         bindViewWithViewModel()
+        
+        viewModel.fetchData()
     }
     
     // MARK: - Private

@@ -43,7 +43,7 @@ class AppFlow {
     }
     
     func showWeather(for city: City) {
-        let screen = CityWeatherScreen()
+        let screen = CityWeatherScreen(city: city, apiService: apiService)
         
         navigationController?.pushViewController(screen.viewController, animated: true)
     }
