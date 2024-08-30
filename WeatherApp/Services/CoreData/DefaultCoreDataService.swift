@@ -17,25 +17,33 @@ final class DefaultCoreDataService: CoreDataService {
     }
     
     func saveCity(city: City) {
-        let cities = fetchCities()
-        let cityToAdd = CityEntity(context: container.viewContext)
-        cityToAdd.country = city.country
-        cityToAdd.latitude = city.latitude
-        cityToAdd.longitude = city.longitude
-        cityToAdd.name = city.name
+        let context = container.viewContext
+        
+        let fetchExistingCitiesRequest: NSFetchRequest<CityEntity> = CityEntity.fetchRequest()
+        fetchExistingCitiesRequest.predicate = NSPredicate(format: "name == %@", city.name)
+        
         do {
-            if !cities.contains(where: { $0.latitude == cityToAdd.latitude || $0.longitude == cityToAdd.longitude }) {
-                try container.viewContext.save()
+            let existingCities = try context.fetch(fetchExistingCitiesRequest)
+            if existingCities.isEmpty {
+                let cityToAdd = CityEntity(context: context)
+                cityToAdd.country = city.country
+                cityToAdd.latitude = city.latitude
+                cityToAdd.longitude = city.longitude
+                cityToAdd.name = city.name
+                
+                try context.save()
             }
         } catch {
-            print("error-Saving data")
+            print("Error fetching or saving data: \(error.localizedDescription)")
         }
     }
     
     func fetchCities() -> [CityEntity] {
+        let context = container.viewContext
         let request: NSFetchRequest<CityEntity> = CityEntity.fetchRequest()
+        
         do {
-            let cities = try container.viewContext.fetch(request)
+            let cities = try context.fetch(request)
             return cities
         } catch {
             print("Failed to fetch cities: \(error)")

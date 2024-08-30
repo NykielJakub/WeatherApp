@@ -44,8 +44,15 @@ final class SearchCityViewController: UIViewController {
         super.viewWillAppear(animated)
         
         bindViewModelWithView()
+        bindViewWithViewModel()
         
         viewModel.fetchSearchedCities()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        subscriptions.removeAll()
     }
     
     // MARK: - Private
@@ -93,6 +100,16 @@ final class SearchCityViewController: UIViewController {
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] cities in
                 self?.contentView.set(cities)
+            })
+            .store(in: &subscriptions)
+    }
+    
+    private func bindViewWithViewModel() {
+        contentView.selectedCity
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] city in
+                self?.viewModel.showWeather(for: city)
             })
             .store(in: &subscriptions)
     }

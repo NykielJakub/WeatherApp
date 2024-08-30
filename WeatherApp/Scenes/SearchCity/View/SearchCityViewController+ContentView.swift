@@ -2,11 +2,16 @@
 // Copyright © 2024  Nykiel Jakub. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 extension SearchCityViewController {
     
     final class ContentView: UIView {
+        
+        // MARK: - Events
+        
+        private(set) lazy var selectedCity: AnyPublisher<City, Error> = _selectedCity.eraseToAnyPublisher()
         
         // MARK: - Properties
         
@@ -14,6 +19,8 @@ extension SearchCityViewController {
         private let tableView = UITableView()
         
         private var searchedCities: [City] = []
+        
+        private let _selectedCity = PassthroughSubject<City, Error>()
         
         // MARK: - Initializers
         
@@ -83,7 +90,7 @@ extension SearchCityViewController.ContentView: UITableViewDataSource, UITableVi
         return cell
     }
     
-//        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//            /*viewModel*/.showWeather(for: searchedCities[indexPath.row])
-//        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        _selectedCity.send(searchedCities[indexPath.row])
+    }
 }
